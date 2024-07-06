@@ -1,0 +1,272 @@
+[
+    {
+        "name": "Patient_1",
+        "first_name": "FirstName_1",
+        "age": 53,
+        "height": 157,
+        "weight": 42,
+        "gender": "Female",
+        "medications": [
+            {
+                "name": "Medication 7",
+                "dosage": "53mg",
+                "start_date": "2023-08-10",
+                "end_date": "2023-08-29"
+            },
+            {
+                "name": "Medication 8",
+                "dosage": "34mg",
+                "start_date": "2023-05-12",
+                "end_date": "2023-06-02"
+            },
+            {
+                "name": "Medication 5",
+                "dosage": "33mg",
+                "start_date": "2023-09-09",
+                "end_date": "2023-09-18"
+            }
+        ],
+        "body_temperatures": [
+            {
+                "date": "2023-12-08",
+                "temperature": 38
+            },
+            {
+                "date": "2023-12-07",
+                "temperature": 37.6
+            },
+            {
+                "date": "2023-12-06",
+                "temperature": 36.2
+            },
+            {
+                "date": "2023-12-05",
+                "temperature": 36.1
+            },
+            {
+                "date": "2023-12-04",
+                "temperature": 37.4
+            }
+        ]
+    },
+    {
+        "name": "Patient_2",
+        "first_name": "FirstName_2",
+        "age": 32,
+        "height": 154,
+        "weight": 83,
+        "gender": "Male",
+        "medications": [
+            {
+                "name": "Medication 6",
+                "dosage": "62mg"
+            },
+            {
+                "name": "Medication 3",
+                "dosage": "26mg"
+            }
+        ],
+        "body_temperatures": [
+            {
+                "date": "2023-12-08",
+                "temperature": 37.3
+            },
+            {
+                "date": "2023-12-07",
+                "temperature": 37.4
+            },
+            {
+                "date": "2023-12-06",
+                "temperature": 37.7
+            },
+            {
+                "date": "2023-12-05",
+                "temperature": 36.6
+            },
+            {
+                "date": "2023-12-04",
+                "temperature": 37.5
+            },
+            {
+                "date": "2023-12-03",
+                "temperature": 37.3
+            },
+            {
+                "date": "2023-12-02",
+                "temperature": 36.2
+            },
+            {
+                "date": "2023-12-01",
+                "temperature": 36.2
+            },
+            {
+                "date": "2023-11-30",
+                "temperature": 36.1
+            },
+            {
+                "date": "2023-11-29",
+                "temperature": 37.6
+            },
+            {
+                "date": "2023-11-28",
+                "temperature": 37.5
+            },
+            {
+                "date": "2023-11-27",
+                "temperature": 36.7
+            },
+            {
+                "date": "2023-11-26",
+                "temperature": 36.1
+            },
+            {
+                "date": "2023-11-25",
+                "temperature": 36.3
+            },
+            {
+                "date": "2023-11-24",
+                "temperature": 36.1
+            },
+            {
+                "date": "2023-11-23",
+                "temperature": 37.8
+            },
+            {
+                "date": "2023-11-22",
+                "temperature": 36.7
+            },
+            {
+                "date": "2023-11-21",
+                "temperature": 36.8
+            },
+            {
+                "date": "2023-11-20",
+                "temperature": 36.6
+            },
+            {
+                "date": "2023-11-19",
+                "temperature": 36.6
+            },
+            {
+                "date": "2023-11-18",
+                "temperature": 36.7
+            },
+            {
+                "date": "2023-11-17",
+                "temperature": 36.1
+            },
+            {
+                "date": "2023-11-16",
+                "temperature": 36.3
+            },
+            {
+                "date": "2023-11-15",
+                "temperature": 36.3
+            },
+            {
+                "date": "2023-11-14",
+                "temperature": 36.4
+            },
+            {
+                "date": "2023-11-13",
+                "temperature": 36.5
+            },
+            {
+                "date": "2023-11-12",
+                "temperature": 37
+            },
+            {
+                "date": "2023-11-11",
+                "temperature": 36.8
+            },
+            {
+                "date": "2023-11-10",
+                "temperature": 37.6
+            },
+            {
+                "date": "2023-11-09",
+                "temperature": 37.3
+            },
+            {
+                "date": "2023-11-08",
+                "temperature": 37.4
+            },
+            {
+                "date": "2023-11-07",
+                "temperature": 37.7
+            },
+            {
+                "date": "2023-11-06",
+                "temperature": 36.2
+            },
+            {
+                "date": "2023-11-05",
+                "temperature": 37.9
+            },
+            {
+                "date": "2023-11-04",
+                "temperature": 36.6
+            },
+            {
+                "date": "2023-11-03",
+                "temperature": 36.1
+            },
+            {
+                "date": "2023-11-02",
+                "temperature": 37.2
+            },
+            {
+                "date": "2023-11-01",
+                "temperature": 36.7
+            },
+            {
+                "date": "2023-10-31",
+                "temperature": 37.6
+            },
+            {
+                "date": "2023-10-30",
+                "temperature": 37.7
+            },
+            {
+                "date": "2023-10-29",
+                "temperature": 36.3
+            },
+            {
+                "date": "2023-10-28",
+                "temperature": 36.7
+            },
+            {
+                "date": "2023-10-27",
+                "temperature": 37.9
+            },
+            {
+                "date": "2023-10-26",
+                "temperature": 36.4
+            },
+            {
+                "date": "2023-10-25",
+                "temperature": 37.2
+            },
+            {
+                "date": "2023-10-24",
+                "temperature": 36.5
+            },
+            {
+                "date": "2023-10-23",
+                "temperature": 36.6
+            },
+            {
+                "date": "2023-10-22",
+                "temperature": 36.2
+            },
+            {
+                "date": "2023-10-21",
+                "temperature": 37.6
+            },
+            {
+                "date": "2023-10-20",
+                "temperature": 36.1
+            }
+        ]
+    }
+]
