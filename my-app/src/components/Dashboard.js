@@ -53,8 +53,9 @@ export const Dashboard = () => {
         const bodyTemperaturesSnapshot = await getDocs(bodyTemperaturesColRef);
         const temperatures = bodyTemperaturesSnapshot.docs.map(doc => {
           const data = doc.data();
-          return { date: data.date, temperature: data.temperature };
+          return { date: new Date(data.date), temperature: data.temperature };
         });
+        temperatures.sort((a, b) => b.date - a.date); // Sort by date descending
         setTemperatureData(temperatures);
         filterTemperatureData(temperatures, scale);
       };
@@ -75,17 +76,19 @@ export const Dashboard = () => {
   }, [selectedPatient, scale]);
 
   const filterTemperatureData = (data, scale) => {
-    const now = new Date();
+    if (data.length === 0) return;
+
+    const mostRecentDate = new Date(data[0].date);
     let filteredData;
     switch (scale) {
       case '1M':
-        filteredData = data.filter(d => new Date(d.date) >= new Date(now.setMonth(now.getMonth() - 1)));
+        filteredData = data.filter(d => new Date(d.date) >= new Date(mostRecentDate.setMonth(mostRecentDate.getMonth() - 1)));
         break;
       case '3M':
-        filteredData = data.filter(d => new Date(d.date) >= new Date(now.setMonth(now.getMonth() - 3)));
+        filteredData = data.filter(d => new Date(d.date) >= new Date(mostRecentDate.setMonth(mostRecentDate.getMonth() - 3)));
         break;
       case '6M':
-        filteredData = data.filter(d => new Date(d.date) >= new Date(now.setMonth(now.getMonth() - 6)));
+        filteredData = data.filter(d => new Date(d.date) >= new Date(mostRecentDate.setMonth(mostRecentDate.getMonth() - 6)));
         break;
       default:
         filteredData = data;
@@ -118,6 +121,9 @@ export const Dashboard = () => {
         time: {
           unit: 'day',
           tooltipFormat: 'MM/dd/yyyy',
+          displayFormats: {
+            day: 'MMM dd, yyyy',
+          },
         },
         title: {
           display: true,
@@ -183,6 +189,8 @@ export const Dashboard = () => {
 };
 
 export default Dashboard;
+
+
 
 
 
