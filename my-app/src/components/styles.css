@@ -1,0 +1,282 @@
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f0f0f0;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+.sidebar {
+    background-color: #ffffff;
+    padding: 10px;
+    overflow-y: auto;
+    border-right: 1px solid #ccc;
+}
+
+.patient-container {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.patient-container:hover,
+.patient-container.selected {
+    background-color: #e0e0e0;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.patient-info {
+    background-color: #f0f0f0;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #000000;
+}
+
+.highlights-medication-row {
+    display: flex;
+    gap: 20px;
+    flex-grow: 1;
+}
+
+.highlights,
+.medication-container {
+    flex: 1;
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+.highlights {
+    flex: 0 0 50%;
+}
+
+.medication-container {
+    flex: 0 0 50%;
+    overflow-x: auto;
+}
+
+.highlights input,
+.highlights button {
+    margin: 5px 0;
+    padding: 10px;
+    font-size: 1em;
+}
+
+.highlights input {
+    width: calc(50% - 10px);
+}
+
+.highlights button {
+    background-color: rgb(63, 81, 164);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    padding: 10px 20px;
+}
+
+.highlights button:hover {
+    background-color: rgb(48, 64, 128);
+}
+
+.medication {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding-bottom: 20px;
+}
+
+.medication-row {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    min-width: 200px;
+    box-sizing: border-box;
+}
+
+.medication-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.medication-form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9em;
+    color: #555;
+    flex: 1 1 calc(25% - 10px);
+    /* Makes labels take up equal width */
+}
+
+.medication-form input {
+    margin: 5px 0;
+    padding: 15px 10px;
+    /* Adjust the padding-top value */
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.medication-form button {
+    background-color: rgb(63, 81, 164);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    padding: 15px 20px;
+    /* Adjust the padding-top value */
+    margin-top: 24px;
+    /* Align with inputs */
+    flex: 1 1 100%;
+    /* Makes button full width */
+}
+
+.medication-container input {
+    margin: 5px 0;
+    padding: 15px 10px;
+    /* Adjust the padding-top value */
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.medication-container button {
+    background-color: rgb(63, 81, 164);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    padding: 15px 20px;
+    /* Adjust the padding-top value */
+}
+
+.medication-container button:hover {
+    background-color: rgb(48, 64, 128);
+}
+
+.temperature-graphic {
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+.scale-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.scale-button {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.scale-button:hover {
+    background-color: #e0e0e0;
+}
+
+.scale-button.selected {
+    background-color: rgb(63, 81, 164);
+    color: white;
+    border-color: rgb(63, 81, 164);
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+}
+
+.temperature-graphic {
+    position: relative;
+    padding: 20px;
+}
+
+.scale-buttons {
+    margin-bottom: 20px;
+}
+
+.scale-button {
+    padding: 10px 20px;
+    border: none;
+    background-color: rgb(63, 81, 164);
+    color: white;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.scale-button.selected {
+    background-color: rgb(48, 64, 128);
+}
+
+.chart-wrapper {
+    position: relative;
+}
+
+.temperature-form {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    z-index: 10;
+}
+
+.temperature-form h3 {
+    margin-bottom: 10px;
+}
+
+.temperature-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.temperature-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.temperature-form button {
+    background-color: rgb(63, 81, 164);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    padding: 10px 20px;
+}
+
+.temperature-form button:hover {
+    background-color: rgb(48, 64, 128);
+}
