@@ -10,15 +10,13 @@ import {
   Tooltip,
   Legend
 } from 'chart.js';
-import { getFirestore, doc, updateDoc } from "firebase/firestore";
+import { collection, query, where, getDocs, updateDoc, doc } from "firebase/firestore";
+import { db } from '../firebase'; // Adjust the path if needed
 import './styles.css';
-
-// Initialize Firebase Firestore
-const db = getFirestore();
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-const TemperatureChart = ({ temperatureData, selectedPatient }) => {
+const TemperatureChart = ({ temperatureData, selectedPatient, onTemperatureUpdated }) => {
   const [filteredTemperatureData, setFilteredTemperatureData] = useState({ labels: [], data: [] });
   const [scale, setScale] = useState('1M');
   const [selectedPoint, setSelectedPoint] = useState(null);
@@ -72,10 +70,9 @@ const TemperatureChart = ({ temperatureData, selectedPatient }) => {
   const handlePointClick = (event, elements) => {
     if (elements.length > 0) {
       const index = elements[0].index;
-        const clickedDate = filteredTemperatureData.labels[index];
-        console.log(clickedDate)
+      const clickedDate = filteredTemperatureData.labels[index];
       const clickedTemperature = filteredTemperatureData.data[index];
-      setSelectedPoint({ date: clickedDate, index });
+      setSelectedPoint({ date: new Date(clickedDate), index });  // Convert string date to Date object
       setNewTemperature(clickedTemperature);
     }
   };
@@ -88,14 +85,26 @@ const TemperatureChart = ({ temperatureData, selectedPatient }) => {
     event.preventDefault();
     const updatedData = [...filteredTemperatureData.data];
     updatedData[selectedPoint.index] = newTemperature;
-      setFilteredTemperatureData({ ...filteredTemperatureData, data: updatedData });
-      console.log(selectedPoint.date)
+    setFilteredTemperatureData({ ...filteredTemperatureData, data: updatedData });
 
-    // Update Firebase
-    const tempDocRef = doc(db, "patients", selectedPatient.id, "body_temperatures", selectedPoint.date.toISOString().split('T')[0]);
-    await updateDoc(tempDocRef, {
-      temperature: newTemperature
-    });
+    const formattedDate = selectedPoint.date.toISOString().split('T')[0];
+    const tempCollectionRef = collection(db, "patients", selectedPatient.id, "body_temperatures");
+    const q = query(tempCollectionRef, where("date", "==", formattedDate));
+
+    try {
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        const tempDocRef = querySnapshot.docs[0].ref;
+        await updateDoc(tempDocRef, {
+          temperature: newTemperature
+        });
+        onTemperatureUpdated({ date: formattedDate, temperature: newTemperature });
+      } else {
+        console.error("No document found with the specified date:", formattedDate);
+      }
+    } catch (error) {
+      console.error('Error updating document:', error);
+    }
 
     setSelectedPoint(null);
   };
@@ -196,7 +205,6 @@ const TemperatureChart = ({ temperatureData, selectedPatient }) => {
 };
 
 export default TemperatureChart;
-
 
 
 

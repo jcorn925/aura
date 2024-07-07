@@ -1,23 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { getFunctions, httpsCallable } from 'firebase/functions';
-import { initializeApp, getApps, getApp } from 'firebase/app';
-import { getFirestore, collection, doc, getDocs } from 'firebase/firestore';
-import firebaseConfig from '../firebaseConfig.json'; // Adjust the path if needed
+import { collection, doc, getDocs } from 'firebase/firestore';
+import { app, db } from '../firebase'; // Adjust the path if needed
 import './styles.css'; // Import the CSS file
 import TemperatureChart from './TemperatureChart'; // Import the new component
 import Highlights from './Highlights'; // Import the new Highlights component
 import Medication from './Medication'; // Import the new Medication component
 
-// Initialize Firebase
-let app;
-if (!getApps().length) {
-  app = initializeApp(firebaseConfig);
-} else {
-  app = getApp();
-}
-
 const functions = getFunctions(app);
-const db = getFirestore(app);
 
 export const Dashboard = () => {
   const [patients, setPatients] = useState([]);
@@ -74,6 +64,13 @@ export const Dashboard = () => {
     setTemperatureData(newTemperatures);
   };
 
+  const handleTemperatureUpdated = (updatedTemperature) => {
+    const updatedTemperatures = temperatureData.map(temp => 
+      temp.date === updatedTemperature.date ? updatedTemperature : temp
+    );
+    setTemperatureData(updatedTemperatures);
+  };
+
   const handleNewMedicationAdded = (newMedications) => {
     setMedicationData(newMedications);
   };
@@ -123,6 +120,7 @@ export const Dashboard = () => {
           <TemperatureChart
             temperatureData={temperatureData}
             selectedPatient={selectedPatient} // Pass the selectedPatient prop
+            onTemperatureUpdated={handleTemperatureUpdated} // Pass the update callback
           />
         )}
       </div>
@@ -131,10 +129,6 @@ export const Dashboard = () => {
 };
 
 export default Dashboard;
-
-
-
-
 
 
 
