@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { getFunctions, httpsCallable } from 'firebase/functions';
 import { collection, doc, getDocs } from 'firebase/firestore';
-import { app, db } from '../firebase'; // Adjust the path if needed
-import './styles.css'; // Import the CSS file
-import TemperatureChart from './TemperatureChart'; // Import the new component
-import Highlights from './Highlights'; // Import the new Highlights component
-import Medication from './Medication'; // Import the new Medication component
+import { app, db } from '../firebase'; 
+import './styles.css'; 
+import TemperatureChart from './TemperatureChart'; 
+import Highlights from './Highlights'; 
+import Medication from './Medication'; 
 
 const functions = getFunctions(app);
 
