@@ -52,7 +52,7 @@ export const Dashboard = () => {
         const patientDocRef = doc(db, 'patients', selectedPatient.id);
         const medicationsColRef = collection(patientDocRef, 'medications');
         const medicationsSnapshot = await getDocs(medicationsColRef);
-        const medications = medicationsSnapshot.docs.map(doc => doc.data());
+        const medications = medicationsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         setMedicationData(medications);
       };
 
@@ -75,9 +75,18 @@ export const Dashboard = () => {
     setMedicationData(newMedications);
   };
 
-  const getMostRecentTemperatureDate = () => {
-    if (temperatureData.length === 0) return null;
-    return new Date(Math.max(...temperatureData.map(temp => new Date(temp.date))));
+  const handlePopulatePatientData = async () => {
+    const populatePatientDataOnCall = httpsCallable(functions, 'populatePatientDataOnCall');
+    try {
+      await populatePatientDataOnCall();
+      // Refresh the patient data after calling the function
+      const getPatientData = httpsCallable(functions, 'getPatientData');
+      const result = await getPatientData();
+      setPatients(result.data.patients);
+      setSelectedPatient(result.data.patients[0]);
+    } catch (error) {
+      console.error('Error populating patient data:', error);
+    }
   };
 
   return (
@@ -98,7 +107,8 @@ export const Dashboard = () => {
         <div className="patient-info">
           {selectedPatient && (
             <div>
-              {selectedPatient.first_name}, {selectedPatient.age}
+              <div>{selectedPatient.first_name}, {selectedPatient.age}</div>
+              <div>{selectedPatient.height} cm, {selectedPatient.weight} kg, {selectedPatient.gender}</div>
             </div>
           )}
         </div>
@@ -107,7 +117,7 @@ export const Dashboard = () => {
             selectedPatient={selectedPatient}
             db={db}
             onNewTemperatureAdded={handleNewTemperatureAdded}
-            mostRecentTemperatureDate={getMostRecentTemperatureDate()}
+            temperatureData={temperatureData} // Pass temperature data to Highlights
           />
           <Medication 
             medicationData={medicationData}
@@ -123,6 +133,7 @@ export const Dashboard = () => {
             onTemperatureUpdated={handleTemperatureUpdated} // Pass the update callback
           />
         )}
+        <button className="populate-button" onClick={handlePopulatePatientData}>Populate Patient Data</button>
       </div>
     </div>
   );

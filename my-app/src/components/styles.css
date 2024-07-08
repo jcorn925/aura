@@ -1,3 +1,4 @@
+/* General Dashboard Styles */
 .dashboard-container {
     display: grid;
     grid-template-columns: 250px 1fr;
@@ -39,9 +40,13 @@
     background-color: #f0f0f0;
     padding: 20px;
     text-align: center;
-    font-size: 1.2em;
+    font-size: 1.8em;
     font-weight: bold;
     color: #000000;
+}
+
+.patient-info div {
+    margin-bottom: 10px;
 }
 
 .highlights-medication-row {
@@ -50,16 +55,11 @@
     flex-grow: 1;
 }
 
-.highlights,
 .medication-container {
     flex: 1;
     background-color: #ffffff;
     padding: 20px;
     border: 1px solid #ccc;
-}
-
-.highlights {
-    flex: 0 0 50%;
 }
 
 .medication-container {
@@ -211,24 +211,6 @@
     padding: 20px;
 }
 
-.scale-buttons {
-    margin-bottom: 20px;
-}
-
-.scale-button {
-    padding: 10px 20px;
-    border: none;
-    background-color: rgb(63, 81, 164);
-    color: white;
-    cursor: pointer;
-    margin-right: 10px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.scale-button.selected {
-    background-color: rgb(48, 64, 128);
-}
-
 .chart-wrapper {
     position: relative;
 }
@@ -278,5 +260,95 @@
 }
 
 .temperature-form button:hover {
+    background-color: rgb(48, 64, 128);
+}
+
+/* Correct Remove Button Styles */
+.remove-button {
+    background-color: transparent !important;
+    border: 1px solid red !important;
+    color: black !important;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.remove-button:disabled {
+    border: 1px solid grey !important;
+    color: grey !important;
+    cursor: not-allowed !important;
+}
+
+.remove-button:hover:not(:disabled) {
+    background-color: red !important;
+    color: white !important;
+}
+
+.highlights {
+    flex: 0 0 50%;
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+}
+
+.highlights h2 {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.temperature-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+.temperature-box {
+    text-align: center;
+    flex: 1;
+}
+
+.temperature-box label {
+    display: block;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.temperature-box .temperature-value {
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+}
+
+.new-temperature-inputs {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.new-temperature-inputs input,
+.new-temperature-inputs button {
+    margin: 5px 0;
+    padding: 10px;
+    font-size: 1em;
+    flex: 1;
+}
+
+.new-temperature-inputs button {
+    background-color: rgb(63, 81, 164);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    padding: 10px 20px;
+    flex: 0 0 auto;
+}
+
+.new-temperature-inputs button:hover {
     background-color: rgb(48, 64, 128);
 }

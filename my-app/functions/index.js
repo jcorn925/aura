@@ -63,3 +63,24 @@ exports.getPatientData = functions.https.onCall(async (data, context) => {
         throw new functions.https.HttpsError('internal', 'Error fetching patient data');
     }
 });
+
+exports.deleteMedication = functions.https.onCall(async (data, context) => {
+  const { patientId, medicationId } = data;
+
+  if (!context.auth) {
+    throw new functions.https.HttpsError('unauthenticated', 'The function must be called while authenticated.');
+  }
+
+  if (!patientId || !medicationId) {
+    throw new functions.https.HttpsError('invalid-argument', 'The function must be called with two arguments: patientId and medicationId.');
+  }
+
+  try {
+    const medicationDocRef = admin.firestore().doc(`patients/${patientId}/medications/${medicationId}`);
+    await medicationDocRef.delete();
+    return { success: true };
+  } catch (error) {
+    console.error('Error deleting medication:', error);
+    throw new functions.https.HttpsError('unknown', 'Failed to delete medication.');
+  }
+});
