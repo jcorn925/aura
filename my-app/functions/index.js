@@ -20,6 +20,7 @@ exports.populatePatientDataOnCall = functions.https.onCall(async (data, context)
         // Iterate over each patient in the data
         for (const patient of patientData) {
             const patientRef = db.collection('patients').doc(patient.name);
+            console.log('Patient: ', patientRef.id)
             await patientRef.set({
                 first_name: patient.first_name,
                 age: patient.age,

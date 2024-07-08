@@ -85,40 +85,44 @@ const Medication = ({ medicationData, selectedPatient, db, onNewMedicationAdded 
       </div>
       {showForm ? (
         <div className="medication-form">
-          <label>
-            Medication Name
-            <input
-              type="text"
-              placeholder="Medication Name"
-              value={medicationName}
-              onChange={(e) => setMedicationName(e.target.value)}
-            />
-          </label>
-          <label>
-            Dosage
-            <input
-              type="text"
-              placeholder="Dosage"
-              value={dosage}
-              onChange={(e) => setDosage(e.target.value)}
-            />
-          </label>
-          <label>
-            Start Date
-            <input
-              type="date"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-            />
-          </label>
-          <label>
-            End Date
-            <input
-              type="date"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-            />
-          </label>
+          <div className="form-row">
+            <label>
+              Medication Name
+              <input
+                type="text"
+                placeholder="Medication Name"
+                value={medicationName}
+                onChange={(e) => setMedicationName(e.target.value)}
+              />
+            </label>
+            <label>
+              Dosage
+              <input
+                type="text"
+                placeholder="Dosage"
+                value={dosage}
+                onChange={(e) => setDosage(e.target.value)}
+              />
+            </label>
+          </div>
+          <div className="form-row">
+            <label>
+              Start Date
+              <input
+                type="date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+              />
+            </label>
+            <label>
+              End Date
+              <input
+                type="date"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+              />
+            </label>
+          </div>
           <button onClick={handleAddMedication}>Submit</button>
           <button onClick={() => setShowForm(false)}>Cancel</button>
         </div>
@@ -131,5 +135,7 @@ const Medication = ({ medicationData, selectedPatient, db, onNewMedicationAdded 
 };
 
 export default Medication;
+
+
 
 
