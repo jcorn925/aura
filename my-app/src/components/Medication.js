@@ -10,6 +10,7 @@ const Medication = ({ medicationData, selectedPatient, db, onNewMedicationAdded 
   const [endDate, setEndDate] = useState('');
   const [error, setError] = useState('');
   const [showForm, setShowForm] = useState(false);
+  const [disabledButtons, setDisabledButtons] = useState([]);
 
   const functions = getFunctions();
 
@@ -48,6 +49,7 @@ const Medication = ({ medicationData, selectedPatient, db, onNewMedicationAdded 
 
   const handleRemoveMedication = async (medId) => {
     if (selectedPatient) {
+      setDisabledButtons((prev) => [...prev, medId]);
       const deleteMedication = httpsCallable(functions, 'deleteMedication');
       try {
         await deleteMedication({ patientId: selectedPatient.id, medicationId: medId });
@@ -60,6 +62,8 @@ const Medication = ({ medicationData, selectedPatient, db, onNewMedicationAdded 
       } catch (err) {
         console.error('Error removing medication:', err);
         setError('Failed to remove medication.');
+      } finally {
+        setDisabledButtons((prev) => prev.filter((id) => id !== medId));
       }
     }
   };
@@ -70,16 +74,19 @@ const Medication = ({ medicationData, selectedPatient, db, onNewMedicationAdded 
       <div className="medication">
         {medicationData.map((med) => (
           <div key={med.id} className="medication-row">
-            <div>{med.name}</div>
-            <div>{med.dosage}</div>
-            <div>Start Date: {med.startDate}</div>
-            <div>End Date: {med.endDate}</div>
-            <button
-              className="remove-button"
-              onClick={() => handleRemoveMedication(med.id)}
-            >
-              Remove
-            </button>
+            <div className="medication-row-inner">
+              <div>{med.name}</div>
+              <div>{med.dosage}</div>
+              <div>Start Date: {med.startDate}</div>
+              <div>End Date: {med.endDate}</div>
+              <button
+                className="remove-button"
+                onClick={() => handleRemoveMedication(med.id)}
+                disabled={disabledButtons.includes(med.id)}
+              >
+                Remove
+              </button>
+            </div>
           </div>
         ))}
       </div>
@@ -135,6 +142,7 @@ const Medication = ({ medicationData, selectedPatient, db, onNewMedicationAdded 
 };
 
 export default Medication;
+
 
 
 

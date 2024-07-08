@@ -77,17 +77,38 @@
     gap: 20px;
     flex-wrap: nowrap;
     /* Ensure items do not wrap */
-    justify-content: flex-start;
-    /* Align items at the start */
+    margin-right: 20px;
+    /* Add margin to the end of the row */
 }
 
 .medication-row {
     background-color: #ffffff;
     border: 1px solid #ccc;
     padding: 20px;
-    min-width: 200px;
+    min-width: 225px;
     /* Ensure a minimum width for each medication container */
-    /* Allow item to grow to fill available space */
+    flex: 0 1 auto;
+    /* Allow item to grow to fit its content */
+    display: flex;
+    justify-content: center;
+    /* Center items horizontally */
+    align-items: center;
+    /* Center items vertically */
+}
+
+.medication-row-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.medication-row div {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    /* Optional: Center text */
 }
 
 .medication-form {

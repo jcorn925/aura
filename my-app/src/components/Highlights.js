@@ -32,6 +32,16 @@ const Highlights = ({ selectedPatient, db, onNewTemperatureAdded, temperatureDat
 
   const handleAddTemperature = async () => {
     if (newTemperature && newTemperatureDate && selectedPatient) {
+      // Check if the date already exists
+      const dateExists = temperatureData.some(
+        (item) => item.date === newTemperatureDate
+      );
+
+      if (dateExists) {
+        alert('A temperature for this date already exists.');
+        return;
+      }
+
       const patientDocRef = doc(db, 'patients', selectedPatient.id);
       const bodyTemperaturesColRef = collection(patientDocRef, 'body_temperatures');
       await addDoc(bodyTemperaturesColRef, {
@@ -85,4 +95,5 @@ const Highlights = ({ selectedPatient, db, onNewTemperatureAdded, temperatureDat
 };
 
 export default Highlights;
+
 
